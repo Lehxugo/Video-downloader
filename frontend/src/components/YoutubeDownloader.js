@@ -1,4 +1,5 @@
 import { useState } from "react";
+import backendURL from "../global";
 
 function YoutubeDownloader () {
 
@@ -10,6 +11,7 @@ function YoutubeDownloader () {
 
     function handleDownloadClick () {
         setUrl('');
+        window.location.href = backendURL + `/youtube-download?URL=${url}`
     }
 
     return (
