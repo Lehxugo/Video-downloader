@@ -13,7 +13,7 @@ function NavigationBar () {
                         <NavLink>Instagram</NavLink>
                     </div>
             </header>
-            <main>
+            <main className="main-content">
                 <Outlet />
             </main>
         </div>

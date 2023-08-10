@@ -51,13 +51,20 @@ function YoutubeDownloader () {
                     <button className="search-button" onClick={handleSearchClick}>Search</button>
                 </div>
             </div>
-            <p>{url}</p>
-            {thumbnailURL !== '' ? <img src={thumbnailURL} alt={title}></img> : <></>}
-            <p>{title}</p>
-            <p>{author}</p>
-            <p>{duration}</p>
-            <p style={{color: 'red'}}>{errorMessage}</p>
-            {title !== '' ? <Link to={backendURL + `/youtube-download?URL=${url}`}>Download</Link> : <></>}
+            {errorMessage !== '' ? <p className="error-message">{errorMessage}</p> : <></>}
+            {title !== '' ?
+                <div className="video-info">
+                    {thumbnailURL !== '' ? <img src={thumbnailURL} alt={title} className="video-thumbnail"></img> : <></>}
+                    <div className="video-details">
+                        <h2>{title}</h2>
+                        <p>{author}</p>
+                        <p>{Math.floor(duration/60)}:{duration%60}</p>
+                        {title !== '' ? <Link to={backendURL + `/youtube-download?URL=${url}`} className="download-button">Download</Link> : <></>}
+                    </div>
+                </div>
+                :
+                <></>
+            }
         </div>
     );
 }
