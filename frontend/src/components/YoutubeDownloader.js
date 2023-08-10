@@ -19,14 +19,12 @@ function YoutubeDownloader () {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', backendURL + `/youtube-info?URL=${url}`);
         xhr.onload = function() {
+            const data = JSON.parse(xhr.responseText);
             if (xhr.status === 200) {
-                const data = JSON.parse(xhr.responseText);
                 setTitle(data.title);
                 setAuthor(data.author);
                 setDuration(data.duration);
-            }
-            if (xhr.status === 404) {
-                const data = JSON.parse(xhr.responseText);
+            } else {
                 setTitle('');
                 setAuthor('');
                 setDuration('');
