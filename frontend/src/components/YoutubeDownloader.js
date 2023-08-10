@@ -14,6 +14,10 @@ function YoutubeDownloader () {
     function handleURLInputChange (e) {
         setUrl(e.target.value);
         setErrorMessage('');
+        setTitle('');
+        setAuthor('');
+        setDuration('');
+        setThumbnailURL('');
     };
 
     function handleSearchClick () {
