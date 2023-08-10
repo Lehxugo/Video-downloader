@@ -8,11 +8,12 @@ function YoutubeDownloader () {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [duration, setDuration] = useState('');
-    const [message, setMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [thumbnailURL, setThumbnailURL] = useState('');
 
     function handleURLInputChange (e) {
         setUrl(e.target.value);
-        setMessage('');
+        setErrorMessage('');
     };
 
     function handleSearchClick () {
@@ -24,11 +25,13 @@ function YoutubeDownloader () {
                 setTitle(data.title);
                 setAuthor(data.author);
                 setDuration(data.duration);
+                setThumbnailURL(data.thumbnailURL);
+                setErrorMessage('');
             } else {
                 setTitle('');
                 setAuthor('');
                 setDuration('');
-                setMessage(data.message);
+                setErrorMessage(data.message);
             }
         };
         xhr.send();
@@ -40,10 +43,11 @@ function YoutubeDownloader () {
             <input type="text" placeholder="Enter a YouTube URL" value={url} onChange={handleURLInputChange}></input>
             <button onClick={handleSearchClick}>Search</button>
             <p>{url}</p>
+            {thumbnailURL !== '' ? <img src={thumbnailURL} alt={title}></img> : <></>}
             <p>{title}</p>
             <p>{author}</p>
             <p>{duration}</p>
-            <p style={{color: 'red'}}>{message}</p>
+            <p style={{color: 'red'}}>{errorMessage}</p>
             {title !== '' ? <Link to={backendURL + `/youtube-download?URL=${url}`}>Download</Link> : <></>}
         </>
     );

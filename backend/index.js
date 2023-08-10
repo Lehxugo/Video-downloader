@@ -23,18 +23,22 @@ app.get('/youtube-info', async function(req,res) {
         let author = "unknown";
         let title = "unknown";
         let duration = 0;
+        let thumbnailURL = "";
 
         await ytdl.getInfo(url).then(info => {
             author = info.videoDetails.author.name;
             title = info.videoDetails.title;
             duration = info.videoDetails.lengthSeconds;
+            // The last thumbnail of the array is the one with the max resolution
+            let thumbnails = info.videoDetails.thumbnails;
+            if (thumbnails.length > 0) thumbnailURL = thumbnails[thumbnails.length - 1].url;
         });
 
         res.status(200);
-        res.json({'title': title, 'author': author, 'duration': duration});
+        res.json({'title': title, 'author': author, 'duration': duration, 'thumbnailURL': thumbnailURL});
     } catch {
         res.status(404);
-        res.json({'message': 'The video does not exist'});
+        res.json({'message': 'The video was not found'});
     }
 });
 
