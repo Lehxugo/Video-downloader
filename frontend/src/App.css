@@ -1,14 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600;700&display=swap');
 
+
+:root {
+  --font-family: 'Poppins', sans-serif;
+  --background-color: white;
+  --font-color: black;
+  --youtube-red-color: #FF0000;
+  --input-shadow-color: rgba(99, 99, 99, 0.2);
+  --white-font-color: whitesmoke;
+  --search-bar-element-radius: 5px;
+  --search-bar-height: 40px;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
-}
-
-:root {
-  --font-color: black;
+  font-family: var(--font-family);
+  color: var(--font-color);
+  background-color: var(--background-color);
 }
 
 .content {
@@ -36,4 +46,60 @@ a, a:visited {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.youtube-downloader-content {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.youtube-downloader-header {
+  display: flex;
+  align-items: center;
+}
+
+.youtube-downloader-header > img {
+  width: 70px;
+  margin-right: 10px;
+}
+
+.search-section {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-bar {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--search-bar-height);
+}
+
+.search-input {
+  height: 100%;
+  width: 50%;
+  border: 0;
+  border-radius: var(--search-bar-element-radius);
+  padding-left: 20px;
+  box-shadow: var(--input-shadow-color) 0px 2px 8px 0px;
+}
+
+.search-button {
+  height: 100%;
+  width: 100px;
+  margin-left: 5px;
+  border: 0;
+  border-radius: var(--search-bar-element-radius);
+  background-color: #246dec;
+  color: var(--white-font-color);
+  font-family: var(--font-family);
+  cursor: pointer;
+  font-weight: 600;
 }
