@@ -91,6 +91,7 @@ a, a:visited {
 .youtube-downloader-header {
   display: flex;
   align-items: center;
+  text-align: center;
 }
 
 .youtube-downloader-header > img {
@@ -191,4 +192,53 @@ a, a:visited {
   font: var(--font-family);
   font-weight: 600;
   font-size: 0.85rem;
+}
+
+.home-title {
+  font-size: 6rem;
+  margin-top: 5%;
+  text-align: center;
+}
+
+.home-subtitle {
+  text-align: center;
+}
+
+.downloaders-grid {
+  flex-grow: 1;
+  width: 50%;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.downloader-cell {
+  border-radius: var(--search-bar-element-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.downloader-card {
+  width: 250px;
+  height: 100px;
+  border-radius: var(--search-bar-element-radius);
+  box-shadow: var(--input-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.downloader-card > img {
+  width: 30px;
+  margin-right: 5px;
+}
+
+.downloader-card:hover {
+  border: 2px solid var(--blue-side-color);
+}
+
+.downloader-card:hover > p{
+  color: var(--blue-side-color);
 }
