@@ -73,10 +73,32 @@ a, a:visited {
 }
 
 .nav-links {
-  width: 15%;
+  width: 250px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.youtube-nav-link {
+  transition: all ease-in-out 150ms;
+  position: relative;
+}
+
+.youtube-nav-link:hover {
+  color: var(--youtube-red-color);
+}
+
+.youtube-nav-link-active::after {
+  content: '';
+  display: block;
+  text-align: center;
+  position: absolute;
+  height: 0.2rem;
+  width: 50%;
+  margin-left: 25%;
+  border-radius: var(--search-bar-element-radius);
+  background-color: var(--youtube-red-color);
+  bottom: -0.3em;
 }
 
 .youtube-downloader-content {
@@ -224,10 +246,12 @@ a, a:visited {
   width: 250px;
   height: 100px;
   border-radius: var(--search-bar-element-radius);
+  border: 2px solid transparent;
   box-shadow: var(--input-shadow);
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all ease-in-out 150ms;
 }
 
 .downloader-card > img {
@@ -235,8 +259,12 @@ a, a:visited {
   margin-right: 5px;
 }
 
+.downloader-card > p{
+  transition: all ease-in-out 150ms;
+}
+
 .downloader-card:hover {
-  border: 2px solid var(--blue-side-color);
+  border-color: var(--blue-side-color);
 }
 
 .downloader-card:hover > p{

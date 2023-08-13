@@ -9,7 +9,7 @@ function NavigationBar () {
                     </Link>
 
                     <div className="nav-links">
-                        <NavLink to={"/youtube"}>YouTube</NavLink>
+                        <NavLink to={"/youtube"} className={({isActive}) => isActive ? 'youtube-nav-link youtube-nav-link-active' : 'youtube-nav-link'}>YouTube</NavLink>
                         <NavLink>Instagram</NavLink>
                     </div>
             </header>
