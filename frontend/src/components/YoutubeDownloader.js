@@ -8,8 +8,10 @@ function YoutubeDownloader () {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [duration, setDuration] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
     const [thumbnailURL, setThumbnailURL] = useState('');
+
+    const [searchingMessage, setSearchingMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     function handleURLInputChange (e) {
         setUrl(e.target.value);
@@ -21,9 +23,11 @@ function YoutubeDownloader () {
     };
 
     function handleSearchClick () {
+        setSearchingMessage('Searching video...');
         const xhr = new XMLHttpRequest();
         xhr.open('GET', backendURL + `/youtube-info?URL=${url}`);
         xhr.onload = function() {
+            setSearchingMessage('');
             const data = JSON.parse(xhr.responseText);
             if (xhr.status === 200) {
                 setTitle(data.title);
@@ -56,6 +60,7 @@ function YoutubeDownloader () {
                 </div>
             </div>
             {errorMessage !== '' ? <p className="error-message">{errorMessage}</p> : <></>}
+            {searchingMessage !== '' ? <p>{searchingMessage}</p> : <></>}
             {title !== '' ?
                 <div className="video-info">
                     {thumbnailURL !== '' ? <img src={thumbnailURL} alt={title} className="video-thumbnail"></img> : <></>}
