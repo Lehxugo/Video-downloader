@@ -6,6 +6,7 @@
   --background-color: white;
   --font-color: black;
   --youtube-red-color: #FF0000;
+  --reddit-orange-color: #FF5700;
   --input-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   --white-font-color: whitesmoke;
   --search-bar-element-radius: 5px;
@@ -85,8 +86,17 @@ a, a:visited {
   position: relative;
 }
 
+.reddit-nav-link {
+  transition: all ease-in-out 150ms;
+  position: relative;
+}
+
 .youtube-nav-link:hover {
   color: var(--youtube-red-color);
+}
+
+.reddit-nav-link:hover {
+  color: var(--reddit-orange-color);
 }
 
 .youtube-nav-link-active::after {
@@ -102,7 +112,20 @@ a, a:visited {
   bottom: -0.3em;
 }
 
-.youtube-downloader-content {
+.reddit-nav-link-active::after {
+  content: '';
+  display: block;
+  text-align: center;
+  position: absolute;
+  height: 0.2rem;
+  width: 50%;
+  margin-left: 25%;
+  border-radius: var(--search-bar-element-radius);
+  background-color: var(--reddit-orange-color);
+  bottom: -0.3em;
+}
+
+.downloader-content {
   margin-top: 100px;
   width: 100%;
   flex-grow: 1;
@@ -111,13 +134,13 @@ a, a:visited {
   align-items: center;
 }
 
-.youtube-downloader-header {
+.downloader-header {
   display: flex;
   align-items: center;
   text-align: center;
 }
 
-.youtube-downloader-header > img {
+.downloader-header > img {
   width: 70px;
   margin-right: 10px;
 }

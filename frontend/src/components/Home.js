@@ -12,6 +12,12 @@ function Home () {
                         <p>YouTube</p>
                     </Link>
                 </div>
+                <div className="downloader">
+                    <Link to={'reddit'} className="downloader-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/bd/Reddit_Logo_Icon.svg/1200px-Reddit_Logo_Icon.svg.png" alt="Reddit icon"></img>
+                        <p>Reddit</p>
+                    </Link>
+                </div>
             </div>
         </>
     );
