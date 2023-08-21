@@ -5,6 +5,7 @@ const ffmpeg = require('ffmpeg-static');
 const cp = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const { error } = require('console');
 
 
 const app = express();
@@ -115,5 +116,35 @@ app.get('/youtube-download', async function(req,res) {
     } catch {
         res.status(500);
         res.json({'message': 'The video could not be downloaded, please try again in 10 minutes'});
+    }
+});
+
+/* Endpoint to get the basic information of the Reddit video */
+app.get('/reddit-info', async function(req,res) {
+    try {
+        var url = req.query.URL;
+
+        // Check if the URL belongs to a Reddit video 
+        if (url.startsWith("https://www.reddit.com/r/")) {
+            if (url.endsWith('/')) url = url.slice(0, -1);
+            url += ".json";
+
+            await fetch(url).then(res => res.json())
+                            .then(data => {
+                                const videoInfo = data[0]["data"]["children"][0]["data"];
+                                res.status(200);
+                                res.json({'title': videoInfo["title"], 'subreddit': videoInfo["subreddit_name_prefixed"], 'thumbnailURL': videoInfo["thumbnail"].replaceAll('amp;', '')});
+                            })
+                            .catch(error => {
+                                res.status(404);
+                                res.json({'message': 'The video does not exist.'})
+                            });
+        } else {
+            res.status(404);
+            res.json({'message': 'This URL does not belong to a Reddit video'});
+        }
+    } catch {
+        res.status(500);
+        res.json({'message': 'There\'s been a problem retrieving the video info, please try again in 10 minutes'});
     }
 });

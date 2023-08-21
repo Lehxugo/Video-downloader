@@ -23,13 +23,13 @@ function RedditDownloader () {
     function handleSearchClick () {
         setSearchingMessage('Searching video...');
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', backendURL + `/youtube-info?URL=${url}`);
+        xhr.open('GET', backendURL + `/reddit-info?URL=${url}`);
         xhr.onload = function() {
             setSearchingMessage('');
             const data = JSON.parse(xhr.responseText);
             if (xhr.status === 200) {
                 setTitle(data.title);
-                setSubredditName(data.author);
+                setSubredditName(data.subreddit);
                 setThumbnailURL(data.thumbnailURL);
                 setErrorMessage('');
             } else {
@@ -45,7 +45,7 @@ function RedditDownloader () {
     return (
         <div className="downloader-content">
             <h1 className="downloader-header">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/bd/Reddit_Logo_Icon.svg/1200px-Reddit_Logo_Icon.svg.png" alt="YouTube icon"></img>
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/bd/Reddit_Logo_Icon.svg/1200px-Reddit_Logo_Icon.svg.png" alt="Reddit icon"></img>
                 Reddit Video Downloader
             </h1>
             <div className="search-section">
