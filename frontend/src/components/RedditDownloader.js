@@ -63,7 +63,7 @@ function RedditDownloader () {
                     <div className="video-details">
                         <h2>{title}</h2>
                         <p>{subredditName}</p>
-                        {title !== '' ? <Link to={backendURL + `/youtube-download?URL=${url}`} className="download-button">Download</Link> : <></>}
+                        {title !== '' ? <Link to={backendURL + `/reddit-download?URL=${url}`} className="download-button">Download</Link> : <></>}
                     </div>
                 </div>
                 :
