@@ -62,7 +62,7 @@ Start the server
 
 Backend API endpoints.
 
-#### Get info from YouTube video
+#### Get YouTube video info
 
 ```http
   GET /youtube-info?URL=https:/youtube.com/watch/...
@@ -82,7 +82,7 @@ Backend API endpoints.
 | :-------- | :------- | :------------------------- |
 | `URL`     | `string` | **Required**. The YouTube video/Short URL |
 
-#### Get info from Reddit video
+#### Get Reddit video info
 
 ```http
   GET /reddit-info?URL=https://www.reddit.com/r...
