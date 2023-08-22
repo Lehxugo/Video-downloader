@@ -72,7 +72,7 @@ Backend API endpoints.
 | :-------- | :------- | :------------------------- |
 | `URL`     | `string` | **Required**. The YouTube video/Short URL |
 
-#### Get YouTube video MP4
+#### Download YouTube video
 
 ```http
   GET /youtube-download?URL=https:/youtube.com/watch/...
@@ -92,7 +92,7 @@ Backend API endpoints.
 | :-------- | :------- | :------------------------- |
 | `URL`     | `string` | **Required**. The Reddit video URL |
 
-#### Get Reddit video MP4
+#### Download Reddit video
 
 ```http
   GET /reddit-download?URL=https://www.reddit.com/r...
