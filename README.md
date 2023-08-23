@@ -94,7 +94,7 @@ Backend API endpoints.
 #### Download YouTube video
 
 You must call this endpoint through a hyperlink, for example:
-- <a src="localhost:3001/youtube-download?URL=https:/youtube.com/watch/..."></a>
+- '<a src="localhost:3001/youtube-download?URL=https:/youtube.com/watch/..."></a>'
 
 ```http
   GET /youtube-download?URL=https:/youtube.com/watch/...
