@@ -82,7 +82,43 @@ ffmpegProcess.on('exit', function() {
     });
 });
 ```
+
 ## How does Reddit Downloader work
+
+Downloading videos from Reddit follows a similar process to the YouTube downloader. Instead of getting the audio and video Readable Streams from a node module, we use Web Scraping to obtain the URLs where video and audio are stored.
+
+First we need to retrieve the page data as JSON through Reddit's JSON API. To do this we simply have to remove the ```/``` at the end of the URL (if there is one) and add ```.json```:
+
+```
+https://www.reddit.com/r/funnyvideos/comments/15ywuo8/so_hows_that_burger/ -->
+https://www.reddit.com/r/funnyvideos/comments/15ywuo8/so_hows_that_burger.json
+```
+
+Once done that, we will recieve a JSON containing a lot of information, the data we need is the video URL located on ```json[0]["data"]["children"][0]["data"]["secure_media"]["reddit_video"]["fallback_url"]``` and the audio URL we get from ```json[0]["data"]["children"][0]["data"]["url"]``` + ```/DASH_AUDIO_128.mp4```:
+
+```javascript
+await fetch(url)
+.then(res => res.json())
+.then(data => {
+    // Scrap video info
+    const videoInfo = data[0]["data"]["children"][0]["data"];
+    const videoStreamURL = videoInfo["secure_media"]["reddit_video"]["fallback_url"];
+    const audioStreamURL = videoInfo["url"] + "/DASH_AUDIO_128.mp4";
+};
+```
+
+With the URLs we can then get the video and audio as Readable Streams and pipe them into the Child Process executing the ```ffmpeg``` command:
+
+```javascript
+// Input audio and video by pipe
+https.get(videoStreamURL, (stream) => {
+    stream.pipe(ffmpegProcess.stdio[3]);
+});
+https.get(audioStreamURL, (stream) => {
+    stream.pipe(ffmpegProcess.stdio[4]);
+});
+```
+
 ## Run Locally
 
 Clone the project
