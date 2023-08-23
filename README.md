@@ -20,7 +20,7 @@ The frontend is written in React and the backend in NodeJS + Express.js.
 To download videos from YouTube I used [node-ytdl-core](https://github.com/fent/node-ytdl-core), a node module made to download from YouTube. This module does not only download videos but also allows to retrieve info and validate video URLs and IDs.
 
 To download any video:
-```
+```javascript
 const ytdl = require('ytdl-core');
 
 const video = ytdl('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
@@ -28,7 +28,7 @@ const video = ytdl('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
 
 This might seem easy, but what we got in the const *video* is not the video itself, is a [Readable Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) of the video data. To get a video file this Readable Stream must be piped to a file:
 
-```
+```javascript
 const fs = require('fs');
 const ytdl = require('ytdl-core');
 
@@ -38,7 +38,7 @@ video.pipe(fs.createWriteStream('video.mp4'));
 
 Another problem is the way YouTube stores their videos, as video and audio are stored separately. With the default ytdl() call, [node-ytdl-core](https://github.com/fent/node-ytdl-core) only downloads the Readable Stream of the video, so after following the code above, your output file will not have any sound. To solve this we must download video and audio in two different calls:
 
-```
+```javascript
 const url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
 let video = ytdl(url, {filter: 'videoonly', quality: 'highest'});
 let audio = ytdl(url, { filter: 'audioonly', quality: 'highest'});
@@ -46,7 +46,7 @@ let audio = ytdl(url, { filter: 'audioonly', quality: 'highest'});
 
 Having both Readable Streams, the only thing left is merging them and pipe to an outuput file. To merge the Streams, I used [ffmpeg-static](https://github.com/eugeneware/ffmpeg-static), this is a node module that provides the static binaries for [FFmpeg](https://ffmpeg.org/), this way we don't have to install anything on our OS. Normally FFmpeg uses files as inputs, but to save space when downloading a video we can create a Node Child Process executing the ```ffmpeg``` command and pipe audio and video Streams to it as inputs:
 
-```
+```javascript
 let ffmpegProcess = cp.spawn(ffmpeg, [
     // Supress non-crucial messages
     '-loglevel', '8', '-hide_banner',
@@ -74,7 +74,7 @@ audio.pipe(ffmpegProcess.stdio[4]);
 
 I wanted to do the same with the output stream, so we don't have to store the output file on the server, but if we pipe the result Stream to the response, because of the MP4 format properties we get a video with infinite duration. The only solution is to temporarily store the output file and delete it after sending it to the client:
 
-```
+```javascript
 ffmpegProcess.on('exit', function() {
     res.download('video.mp4', async function () {
         // After downloading the file in the client's side, delete the file
