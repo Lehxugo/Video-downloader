@@ -141,7 +141,7 @@ app.get('/reddit-info', async function(req,res) {
                                 res.json({'message': 'The video does not exist.'})
                             });
         } else {
-            res.status(404);
+            res.status(400);
             res.json({'message': 'This URL does not belong to a Reddit video'});
         }
     } catch {
@@ -211,7 +211,7 @@ app.get('/reddit-download', async function(req,res) {
                                 });
                             });
         } else {
-            res.status(404);
+            res.status(400);
             res.json({'message': 'This URL does not belong to a Reddit video'});
         }
     } catch {
