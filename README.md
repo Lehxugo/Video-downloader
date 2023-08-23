@@ -13,7 +13,7 @@ Video Downloader is a Web App to download videos from:
 - YouTube
 - Reddit
 
-To do so, Video Downloader makes use of [ffmpeg-static](https://github.com/eugeneware/ffmpeg-static), [node-ytdl-core](https://github.com/fent/node-ytdl-core) and web scraping.
+To do so, Video Downloader makes use of [ffmpeg-static](https://github.com/eugeneware/ffmpeg-static), [node-ytdl-core](https://github.com/fent/node-ytdl-core) and Reddit's JSON API.
 The frontend is written in React and the backend in NodeJS + Express.js.
 ## How does YouTube Downloader work
 
@@ -83,9 +83,10 @@ ffmpegProcess.on('exit', function() {
 });
 ```
 
+
 ## How does Reddit Downloader work
 
-Downloading videos from Reddit follows a similar process to the YouTube downloader. Instead of getting the audio and video Readable Streams from a node module, we use Web Scraping to obtain the URLs where video and audio are stored.
+Downloading videos from Reddit follows a similar process to the YouTube downloader. Instead of getting the audio and video Readable Streams from a node module, we use Reddit's JSON API to obtain the URLs where video and audio are stored.
 
 First we need to retrieve the page data as JSON through Reddit's JSON API. To do this we simply have to remove the ```/``` at the end of the URL (if there is one) and add ```.json```:
 
