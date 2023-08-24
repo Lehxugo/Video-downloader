@@ -15,6 +15,9 @@ Video Downloader is a Web App to download videos from:
 
 To do so, Video Downloader makes use of [ffmpeg-static](https://github.com/eugeneware/ffmpeg-static), [node-ytdl-core](https://github.com/fent/node-ytdl-core) and Reddit's JSON API.
 The frontend is written in React and the backend in NodeJS + Express.js.
+
+https://github.com/Lehxugo/Video-downloader/assets/61582099/7565b22a-ec12-42a6-9120-30f1168d1123
+
 ## How does YouTube Downloader work
 
 To download videos from YouTube I used [node-ytdl-core](https://github.com/fent/node-ytdl-core), a node module made to download from YouTube. This module does not only download videos but also allows to retrieve info and validate video URLs and IDs.
